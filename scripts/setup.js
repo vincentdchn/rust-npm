@@ -51,8 +51,11 @@ async function setup() {
     console.log('\n✨ Setup complete! Your project is ready.');
     console.log(`\nNext steps:`);
     console.log(`1. Check the generated configuration files`);
-    console.log(`2. Run \`cargo build\` to compile the Rust project`);
-    console.log(`3. Use \`pnpm run bump\` to increment version when needed`);
+    console.log(`2. Commit your changes when ready`);
+    console.log(`3. Run \`cargo build\` to compile the Rust project`);
+    console.log(
+        `4. Use \`pnpm run bump\` when you need to release a new version`,
+    );
 
     rl.close();
 }
