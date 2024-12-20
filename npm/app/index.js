@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const { spawnSync } = require('child_process');
+const packageName = 'rustnpmtest';
 
 /**
  * Returns the executable path which is located inside `node_modules`
@@ -22,7 +23,7 @@ function getExePath() {
     try {
         // Since the binary will be located inside `node_modules`, we can simply call `require.resolve`
         return require.resolve(
-            `rustnpmtest-${os}-${arch}/bin/rustnpmtest${extension}`,
+            `${packageName}-${os}-${arch}/bin/${packageName}${extension}`,
         );
     } catch (e) {
         throw new Error(
