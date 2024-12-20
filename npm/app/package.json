@@ -1,0 +1,29 @@
+{
+    "name": "rust-npm",
+    "version": "0.1.0",
+    "description": "Votre description",
+    "bin": {
+        "rust-npm": "./index.js"
+    },
+    "keywords": [
+        "cli",
+        "rust"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vincentdchn/rust-npm"
+    },
+    "bugs": {
+        "url": "https://github.com/vincentdchn/rust-npm"
+    },
+    "homepage": "https://github.com/vincentdchn/rust-npm#readme",
+    "license": "MIT",
+    "optionalDependencies": {
+        "rust-npm-linux-x64": "0.1.0",
+        "rust-npm-linux-arm64": "0.1.0",
+        "rust-npm-darwin-x64": "0.1.0",
+        "rust-npm-darwin-arm64": "0.1.0",
+        "rust-npm-windows-x64": "0.1.0",
+        "rust-npm-windows-arm64": "0.1.0"
+    }
+}

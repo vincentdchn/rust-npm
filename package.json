@@ -1,0 +1,32 @@
+{
+    "name": "rust-npm",
+    "version": "1.0.0",
+    "description": "Simple CLI to print a message",
+    "keywords": [
+        "cli",
+        "rust"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/vincentdchn/rust-npm.git"
+    },
+    "bugs": {
+        "url": "https://github.com/vincentdchn/rust-npm/issues"
+    },
+    "homepage": "https://github.com/vincentdchn/rust-npm#readme",
+    "license": "MIT",
+    "scripts": {
+        "action": "ncc build action/index.ts -o action"
+    },
+    "dependencies": {
+        "@actions/core": "^1.10.1",
+        "@actions/exec": "^1.1.1",
+        "@actions/github": "^6.0.0",
+        "@actions/tool-cache": "^2.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@vercel/ncc": "^0.38.1",
+        "typescript": "^5.0.0"
+    }
+}

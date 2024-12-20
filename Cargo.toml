@@ -1,0 +1,23 @@
+[package]
+name = "rust-npm"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+authors = ["vincentdchn"]
+description = "Simple CLI to print a message"
+homepage = "https://github.com/vincentdchn/rust-npm"
+repository = "https://github.com/vincentdchn/rust-npm"
+keywords = [
+	"cli",
+	"rust",
+]
+categories = ["development-tools"]
+readme = "./README.md"
+
+
+[profile.release]
+strip = "symbols"
+opt-level = "z"
+lto = "thin"
+codegen-units = 1
+panic = "abort"
