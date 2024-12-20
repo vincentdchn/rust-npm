@@ -2,6 +2,8 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
+const PACKAGE_NAME = 'rustnpmtest';
+
 function readJsonFile(filePath) {
     return JSON.parse(fs.readFileSync(filePath, 'utf8'));
 }
@@ -43,6 +45,23 @@ function bumpVersion(type = 'patch') {
 
     rootPackage.version = newVersion;
     npmAppPackage.version = newVersion;
+
+    // Update optionalDependencies if they exist
+    if (rootPackage.optionalDependencies) {
+        Object.keys(rootPackage.optionalDependencies).forEach((dep) => {
+            if (dep.startsWith(PACKAGE_NAME)) {
+                rootPackage.optionalDependencies[dep] = newVersion;
+            }
+        });
+    }
+
+    if (npmAppPackage.optionalDependencies) {
+        Object.keys(npmAppPackage.optionalDependencies).forEach((dep) => {
+            if (dep.startsWith(PACKAGE_NAME)) {
+                npmAppPackage.optionalDependencies[dep] = newVersion;
+            }
+        });
+    }
 
     writeJsonFile(path.join(__dirname, '..', 'package.json'), rootPackage);
     writeJsonFile(
