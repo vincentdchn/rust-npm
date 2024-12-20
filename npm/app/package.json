@@ -1,9 +1,9 @@
 {
-    "name": "rust-npm",
-    "version": "1.0.2",
+    "name": "rustnpmtest",
+    "version": "1.0.3",
     "description": "Simple CLI to print a message",
     "bin": {
-        "rust-npm": "./index.js"
+        "rustnpmtest": "./index.js"
     },
     "keywords": [
         "cli",
@@ -19,11 +19,11 @@
     "homepage": "https://github.com/vincentdchn/rust-npm#readme",
     "license": "MIT",
     "optionalDependencies": {
-        "rust-npm-linux-x64": "1.0.2",
-        "rust-npm-linux-arm64": "1.0.2",
-        "rust-npm-darwin-x64": "1.0.2",
-        "rust-npm-darwin-arm64": "1.0.2",
-        "rust-npm-windows-x64": "1.0.2",
-        "rust-npm-windows-arm64": "1.0.2"
+        "rustnpmtest-linux-x64": "1.0.3",
+        "rustnpmtest-linux-arm64": "1.0.3",
+        "rustnpmtest-darwin-x64": "1.0.3",
+        "rustnpmtest-darwin-arm64": "1.0.3",
+        "rustnpmtest-windows-x64": "1.0.3",
+        "rustnpmtest-windows-arm64": "1.0.3"
     }
 }

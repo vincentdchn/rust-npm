@@ -22,7 +22,7 @@ function getExePath() {
     try {
         // Since the binary will be located inside `node_modules`, we can simply call `require.resolve`
         return require.resolve(
-            `npm-rust-${os}-${arch}/bin/npm-rust${extension}`,
+            `rustnpmtest-${os}-${arch}/bin/rustnpmtest${extension}`,
         );
     } catch (e) {
         throw new Error(

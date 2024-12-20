@@ -54,7 +54,7 @@ async function run(): Promise<void> {
         }
 
         // Construct asset name
-        const assetName = `rust-npm-${platformTarget}.zip`;
+        const assetName = `rustnpmtest-${platformTarget}.zip`;
 
         // Get release assets
         const release = await octokit.rest.repos.getReleaseByTag({
@@ -91,7 +91,7 @@ async function run(): Promise<void> {
         core.addPath(extractedPath);
 
         // Set output
-        core.setOutput('rust-npm-path', binaryPath);
+        core.setOutput('rustnpmtest-path', binaryPath);
         core.info('Rust NPM has been installed successfully');
 
         // Prepare arguments
@@ -134,10 +134,10 @@ async function getArgsFromPackageJson() {
         );
         const packageJson = JSON.parse(packageJsonFile.toString());
 
-        // Extract args from the `rust-npm` script in package.json, starting after
-        // `rust-npm ` and ending before the next `&&` or end of line
-        const regexResult = /rust-npm\s([^&&]*)/g.exec(
-            packageJson.scripts['rust-npm'],
+        // Extract args from the `rustnpmtest` script in package.json, starting after
+        // `rustnpmtest ` and ending before the next `&&` or end of line
+        const regexResult = /rustnpmtest\s([^&&]*)/g.exec(
+            packageJson.scripts['rustnpmtest'],
         );
         if (regexResult && regexResult.length > 1) {
             const args = regexResult[1];

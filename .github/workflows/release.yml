@@ -22,42 +22,42 @@ jobs:
                           OS: ubuntu-20.04,
                           TOOLCHAIN: stable,
                           TARGET: x86_64-unknown-linux-gnu,
-                          BIN: rust-npm,
+                          BIN: rustnpmtest,
                       }
                     - {
                           NAME: linux-arm64-glibc,
                           OS: ubuntu-20.04,
                           TOOLCHAIN: stable,
                           TARGET: aarch64-unknown-linux-gnu,
-                          BIN: rust-npm,
+                          BIN: rustnpmtest,
                       }
                     - {
                           NAME: win32-x64-msvc,
                           OS: windows-2022,
                           TOOLCHAIN: stable,
                           TARGET: x86_64-pc-windows-msvc,
-                          BIN: rust-npm.exe,
+                          BIN: rustnpmtest.exe,
                       }
                     - {
                           NAME: win32-arm64-msvc,
                           OS: windows-2022,
                           TOOLCHAIN: stable,
                           TARGET: aarch64-pc-windows-msvc,
-                          BIN: rust-npm.exe,
+                          BIN: rustnpmtest.exe,
                       }
                     - {
                           NAME: darwin-x64,
                           OS: macos-13,
                           TOOLCHAIN: stable,
                           TARGET: x86_64-apple-darwin,
-                          BIN: rust-npm,
+                          BIN: rustnpmtest,
                       }
                     - {
                           NAME: darwin-arm64,
                           OS: macos-13,
                           TOOLCHAIN: stable,
                           TARGET: aarch64-apple-darwin,
-                          BIN: rust-npm,
+                          BIN: rustnpmtest,
                       }
         steps:
             - name: Checkout
@@ -102,9 +102,9 @@ jobs:
                   # set the package name
                   # note: use 'windows' as OS name instead of 'win32'
                   if [ "${{ matrix.build.OS }}" = "windows-2022" ]; then
-                    export node_pkg="rust-npm-windows-${node_arch}"
+                    export node_pkg="rustnpmtest-windows-${node_arch}"
                   else
-                    export node_pkg="rust-npm-${node_os}-${node_arch}"
+                    export node_pkg="rustnpmtest-${node_os}-${node_arch}"
                   fi
                   # create the package directory
                   mkdir -p "${node_pkg}/bin"
@@ -121,7 +121,7 @@ jobs:
             - name: Upload Artifact
               uses: actions/upload-artifact@v4
               with:
-                  name: rust-npm-${{ matrix.build.TARGET }}
+                  name: rustnpmtest-${{ matrix.build.TARGET }}
                   path: target/${{ matrix.build.TARGET }}/release/${{ matrix.build.BIN }}
 
     publish-npm-base:

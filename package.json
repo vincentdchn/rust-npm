@@ -1,6 +1,6 @@
 {
-    "name": "rust-npm",
-    "version": "1.0.2",
+    "name": "rustnpmtest",
+    "version": "1.0.3",
     "description": "Simple CLI to print a message",
     "keywords": [
         "cli",
