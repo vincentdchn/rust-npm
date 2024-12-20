@@ -1,0 +1,12 @@
+{
+  "package_name": "testtest",
+  "version": "1.0.0",
+  "description": "A description test",
+  "author": "vincentdchn",
+  "repository": "https://github.com/vincentdchn/rust-npm",
+  "license": "MIT",
+  "keywords": [
+    "cli",
+    "rust"
+  ]
+}

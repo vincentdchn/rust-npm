@@ -1,90 +1,20 @@
 const fs = require('fs');
 const path = require('path');
-const { execSync } = require('child_process');
 
-const PACKAGE_NAME = 'rustnpmtest';
+// Lire la version actuelle depuis config.json
+const configPath = path.resolve(__dirname, '../config.json');
+const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
 
-function readJsonFile(filePath) {
-    return JSON.parse(fs.readFileSync(filePath, 'utf8'));
-}
+// Incrémenter la version
+const version = config.version.split('.');
+version[2] = parseInt(version[2]) + 1;
+const newVersion = version.join('.');
 
-function writeJsonFile(filePath, content) {
-    fs.writeFileSync(filePath, JSON.stringify(content, null, 2) + '\n');
-}
+// Mettre à jour config.json
+config.version = newVersion;
+fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
 
-function updateCargoToml(version) {
-    const cargoPath = path.join(__dirname, '..', 'Cargo.toml');
-    let content = fs.readFileSync(cargoPath, 'utf8');
-    content = content.replace(/version = "[^"]+"/g, `version = "${version}"`);
-    fs.writeFileSync(cargoPath, content);
-}
+// Mettre à jour tous les fichiers de configuration
+require('./update-config');
 
-function bumpVersion(type = 'patch') {
-    const rootPackage = readJsonFile(
-        path.join(__dirname, '..', 'package.json'),
-    );
-    const npmAppPackage = readJsonFile(
-        path.join(__dirname, '..', 'npm', 'app', 'package.json'),
-    );
-
-    const currentVersion = rootPackage.version;
-    const [major, minor, patch] = currentVersion.split('.').map(Number);
-
-    let newVersion;
-    switch (type.toLowerCase()) {
-        case 'major':
-            newVersion = `${major + 1}.0.0`;
-            break;
-        case 'minor':
-            newVersion = `${major}.${minor + 1}.0`;
-            break;
-        case 'patch':
-        default:
-            newVersion = `${major}.${minor}.${patch + 1}`;
-    }
-
-    rootPackage.version = newVersion;
-    npmAppPackage.version = newVersion;
-
-    // Update optionalDependencies if they exist
-    if (rootPackage.optionalDependencies) {
-        Object.keys(rootPackage.optionalDependencies).forEach((dep) => {
-            if (dep.startsWith(PACKAGE_NAME)) {
-                rootPackage.optionalDependencies[dep] = newVersion;
-            }
-        });
-    }
-
-    if (npmAppPackage.optionalDependencies) {
-        Object.keys(npmAppPackage.optionalDependencies).forEach((dep) => {
-            if (dep.startsWith(PACKAGE_NAME)) {
-                npmAppPackage.optionalDependencies[dep] = newVersion;
-            }
-        });
-    }
-
-    writeJsonFile(path.join(__dirname, '..', 'package.json'), rootPackage);
-    writeJsonFile(
-        path.join(__dirname, '..', 'npm', 'app', 'package.json'),
-        npmAppPackage,
-    );
-    updateCargoToml(newVersion);
-
-    console.log(`✨ Updated version to ${newVersion}`);
-
-    // Exécuter cargo build
-    try {
-        console.log('🔨 Running cargo build...');
-        execSync('cargo build', {
-            stdio: 'inherit',
-            cwd: path.join(__dirname, '..'),
-        });
-        console.log('✅ Build completed successfully');
-    } catch (error) {
-        console.error('❌ Build error:', error.message);
-        process.exit(1);
-    }
-}
-
-const bumpType = process.argv[2] || 'patch';
-bumpVersion(bumpType);
+console.log(`Version mise à jour vers ${newVersion}`);
