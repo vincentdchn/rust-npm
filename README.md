@@ -67,24 +67,20 @@ This will:
 
 -   Increment the version in all necessary files
 -   Update both Rust and NPM configurations
--   Stage the changes for commit
+-   Create a git commit with the changes
+-   Create a local git tag
 
-2. Commit and push the changes:
+2. Review the changes and when ready:
 
 ```bash
-git add .
-git commit -m "chore: bump version to x.x.x"
+# Push the commits
 git push
+
+# Push the tag to trigger the release
+git push origin v[version]
 ```
 
-3. Create and push a tag to trigger the release:
-
-```bash
-git tag vx.x.x
-git push origin vx.x.x
-```
-
-> **Note**: Replace `x.x.x` with your actual version number (e.g., v1.0.0)
+> **Note**: Pushing a tag will automatically trigger the GitHub Actions release workflow.
 
 ## 🚀 CI/CD with GitHub Actions
 
@@ -131,41 +127,7 @@ The workflow automatically:
     - Go to your repository Settings > Actions
     - Ensure Actions are enabled for your repository
 
-> **Note**: The build and publish processes are fully automated through GitHub Actions. Publishing is triggered by pushing a tag in the format `vx.x.x` - there's no need to manually publish to NPM.
-
-## 🚀 Building
-
-To build the Rust binary:
-
-```bash
-cargo build
-```
-
-For production release:
-
-```bash
-cargo build --release
-```
-
-## 📦 Publishing
-
-1. Build your package:
-
-```bash
-pnpm run build
-```
-
-2. Test your package:
-
-```bash
-pnpm test
-```
-
-3. Publish to NPM:
-
-```bash
-pnpm publish
-```
+> **Note**: The build and publish processes are fully automated through GitHub Actions. Publishing is triggered by pushing a tag in the format `vx.x.x`.
 
 ## 📄 License
 
