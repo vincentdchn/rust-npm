@@ -52,7 +52,7 @@ async function setup() {
     console.log(`\nNext steps:`);
     console.log(`1. Check the generated configuration files`);
     console.log(`2. Run \`cargo build\` to compile the Rust project`);
-    console.log(`3. Use \`npm run bump\` to increment version when needed`);
+    console.log(`3. Use \`pnpm run bump\` to increment version when needed`);
 
     rl.close();
 }
